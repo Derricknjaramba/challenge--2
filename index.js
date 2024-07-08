@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load items from localStorage on page load
     var savedItems = localStorage.getItem('shoppingListItems');
     if (savedItems) {
-        var listContainer = document.getElementById('listContainer');
+        let listContainer = document.getElementById('listContainer');
         listContainer.innerHTML = savedItems;
         addEditFunctionality(); // Add edit functionality to loaded items
     }
@@ -24,17 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function addItem() {
-    var itemInput = document.getElementById('itemInput');
-    var itemName = itemInput.value.trim();
+    let itemInput = document.getElementById('itemInput');
+    let itemName = itemInput.value.trim();
 
     if (itemName === '') {
         alert('Please enter an item.');
         return;
     }
 
-    var listContainer = document.getElementById('listContainer');
+    let listContainer = document.getElementById('listContainer');
 
-    var listItem = document.createElement('li');
+    let listItem = document.createElement('li');
     listItem.className = 'list-item';
     listItem.innerHTML = `
         <span>${itemName}</span>
@@ -55,8 +55,8 @@ function addItem() {
 }
 
 function editItem(button) {
-    var span = button.parentNode.querySelector('span');
-    var newText = prompt('Edit item:', span.textContent);
+    let span = button.parentNode.querySelector('span');
+    let newText = prompt('Edit item:', span.textContent);
     if (newText !== null) {
         span.textContent = newText;
 
@@ -66,7 +66,7 @@ function editItem(button) {
 }
 
 function toggleMark(button) {
-    var listItem = button.parentNode;
+    let listItem = button.parentNode;
     listItem.classList.toggle('marked');
 
     // Save to localStorage
@@ -74,7 +74,7 @@ function toggleMark(button) {
 }
 
 function deleteItem(button) {
-    var listItem = button.parentNode;
+    let listItem = button.parentNode;
     listItem.remove();
 
     // Save to localStorage
@@ -82,44 +82,44 @@ function deleteItem(button) {
 }
 
 function markPurchased() {
-    var listItems = document.querySelectorAll('.list-item');
+    let listItems = document.querySelectorAll('.list-item');
     listItems.forEach(function(item) {
         item.classList.add('marked');
     });
 
-    // Save to localStorage
+    
     saveToLocalStorage();
 }
 
 function clearList() {
-    var listContainer = document.getElementById('listContainer');
+    let listContainer = document.getElementById('listContainer');
     listContainer.innerHTML = '';
 
-    // Save to localStorage
+   
     saveToLocalStorage();
 }
 
 function saveToLocalStorage() {
-    var listContainer = document.getElementById('listContainer');
+    let listContainer = document.getElementById('listContainer');
     localStorage.setItem('shoppingListItems', listContainer.innerHTML);
 }
 
 function addEditFunctionality() {
-    var editButtons = document.querySelectorAll('.editBtn');
+    let editButtons = document.querySelectorAll('.editBtn');
     editButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             editItem(this);
         });
     });
 
-    var markButtons = document.querySelectorAll('.markBtn');
+    let markButtons = document.querySelectorAll('.markBtn');
     markButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             toggleMark(this);
         });
     });
 
-    var deleteButtons = document.querySelectorAll('.deleteBtn');
+    let deleteButtons = document.querySelectorAll('.deleteBtn');
     deleteButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             deleteItem(this);
